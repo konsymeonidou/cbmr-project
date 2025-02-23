@@ -4,3 +4,5 @@ pymongo
 pandas
 pydantic
 pytest
+fastapi-users[beanie]
+uvicorn[standard]
