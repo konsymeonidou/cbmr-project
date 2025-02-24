@@ -17,3 +17,7 @@ show dbs
 use <db_name>
 show collections
 db.<collection_name>.find()
+
+https://medium.com/@saqibajuna/shopify-api-integration-using-fastapi-mongodb-and-streamlit-0fb7e60d811d
+https://github.com/saqiba123/shopify-app-using-fastapi-and-streamlit
+streamlit run streamlit_dashboard.py
