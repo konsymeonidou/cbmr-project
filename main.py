@@ -1,6 +1,8 @@
 from fastapi import FastAPI
+from pymongo import MongoClient
 from app.routes.metrics import metrics_router
 from app.routes.candidate import candidate_router
+from contextlib import asynccontextmanager
 
 app = FastAPI()
 
@@ -8,7 +10,24 @@ app = FastAPI()
 app.include_router(metrics_router)
 app.include_router(candidate_router)
 
-# # Root endpoint
-# @app.get("/")
-# def read_root():
-#     return {"message": "Welcome to the Health Metrics API!"}
+# MongoDB connection
+# @app.on_event("startup")
+# def startup_db_client():
+#     app.mongodb_client = MongoClient("mongodb://localhost:27017")
+#     app.database = app.mongodb_client["menstrual_db"]  # Replace with your database name
+#     print("Connected to MongoDB!")
+
+# @app.on_event("shutdown")
+# def shutdown_db_client():
+#     app.mongodb_client.close()
+#     print("Disconnected from MongoDB!")
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    app.mongodb_client = MongoClient("mongodb://localhost:27017")
+    app.database = app.mongodb_client["menstrual_db"]  # Replace with your database name
+    print("Connected to MongoDB!")
+    yield
+    app.mongodb_client.close()
+    print("Disconnected from MongoDB!")
+
+app.router.lifespan_context = lifespan

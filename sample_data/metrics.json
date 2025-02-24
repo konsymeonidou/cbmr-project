@@ -1,0 +1,18 @@
+{
+    "candidate_id": "54321",
+    "date": "2024-02-24",
+    "daily_metrics": {
+        "flow": 3,
+        "mood": "Happy",
+        "steps": 10000,
+        "weight": 72.5,
+        "high_days": 3
+    },
+    "optional_metrics": {
+        "height": 1.75,
+        "blood_type": "A+",
+        "allergies": "Pollen",
+        "medications": "Ibuprofen",
+        "conditions": "Asthma"
+    }
+}

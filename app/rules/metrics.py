@@ -10,7 +10,9 @@ def get_collection_metrics(request: Request):
 def create_HealthMetrics(request: Request, HealthMetrics: HealthMetrics = Body(...)):
     HealthMetrics = jsonable_encoder(HealthMetrics)
     new_HealthMetrics = get_collection_metrics(request).insert_one(HealthMetrics)
-    created_HealthMetrics = get_collection_metrics(request).find_one({"health_id": new_HealthMetrics.inserted_id})
+    created_HealthMetrics = get_collection_metrics(request).find_one({"_id": new_HealthMetrics.inserted_id})
+    if created_HealthMetrics:
+        created_HealthMetrics["id"] = created_HealthMetrics["_id"]
     return created_HealthMetrics
 
 

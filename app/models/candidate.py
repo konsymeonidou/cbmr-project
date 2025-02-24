@@ -1,9 +1,10 @@
+from bson import ObjectId
 from pydantic import BaseModel, Field
 from typing import Optional
-import uuid
+
 
 class Candidate(BaseModel):
-    id: str = Field(default_factory=uuid.uuid4, alias="id")
+    id: str = Field(default_factory=lambda: str(ObjectId()), alias="_id")
     name: str
     email: Optional[str]
     phone_number: Optional[str]
@@ -11,7 +12,7 @@ class Candidate(BaseModel):
     age: int
 
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "name": "Mary Doe",
                 "email": "[email protected]",
@@ -20,3 +21,4 @@ class Candidate(BaseModel):
                 "age": 30
             }
         }
+        populate_by_name = True 

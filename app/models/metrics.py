@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field, field_validator
 from typing import Optional
 from datetime import date
-import uuid
+from bson import ObjectId
 
 
 class CycleMetrics(BaseModel):
@@ -12,7 +12,7 @@ class CycleMetrics(BaseModel):
     high_days: int
 
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "flow": 3,
                 "mood": "Happy",
@@ -43,7 +43,7 @@ class OptionalMetrics(BaseModel):
     conditions: Optional[str]
 
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "height": 1.75,
                 "blood_type": "A+",
@@ -54,8 +54,11 @@ class OptionalMetrics(BaseModel):
         }
 
 class HealthMetrics(BaseModel):
-    health_id: str = Field(default_factory=uuid.uuid4, alias="id")
+    id: str = Field(default_factory=lambda: str(ObjectId()), alias="_id")
     candidate_id: str
     date: date
     daily_metrics: CycleMetrics
     optional_metrics: Optional[OptionalMetrics]
+
+    class Config:
+        populate_by_name = True 

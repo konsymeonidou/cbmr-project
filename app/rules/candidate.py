@@ -9,10 +9,11 @@ def get_collection_candidate(request: Request):
 
 
 def create_candidate(request: Request, candidate: Candidate = Body(...)):
-    candidate_data = jsonable_encoder(candidate)
-    candidate_data["_id"] = candidate_data.pop("id") 
+    candidate = jsonable_encoder(candidate)
     new_candidate = get_collection_candidate(request).insert_one(candidate)
     created_candidate = get_collection_candidate(request).find_one({"_id": new_candidate.inserted_id})
+    if created_candidate:
+        created_candidate["id"] = created_candidate["_id"]
     return created_candidate
 
 

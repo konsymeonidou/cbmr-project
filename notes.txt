@@ -1,1 +1,19 @@
 sudo service mongod start
+sudo systemctl start mongod
+sudo systemctl enable mongod
+sudo systemctl status mongod
+
+uvicorn main:app --reload
+
+python -m venv venv
+source venv/bin/activate
+venv\Scripts\activate
+
+pip install -r requirements.txt
+
+
+mongosh
+show dbs
+use <db_name>
+show collections
+db.<collection_name>.find()
