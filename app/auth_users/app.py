@@ -3,9 +3,9 @@ from contextlib import asynccontextmanager
 from beanie import init_beanie
 from fastapi import Depends, FastAPI
 
-from app.db import User, db
-from app.schemas import UserCreate, UserRead, UserUpdate
-from app.users import auth_backend, current_active_user, fastapi_users
+from db import User, db
+from schemas import UserCreate, UserRead, UserUpdate
+from users import auth_backend, current_active_user, fastapi_users
 
 
 @asynccontextmanager

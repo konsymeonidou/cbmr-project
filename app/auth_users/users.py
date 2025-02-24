@@ -10,9 +10,9 @@ from fastapi_users.authentication import (
 )
 from fastapi_users.db import BeanieUserDatabase, ObjectIDIDMixin
 
-from app.db import User, get_user_db
+from db import User, get_user_db
 
-SECRET = "SECRET"
+SECRET = "mytokensecret"
 
 
 class UserManager(ObjectIDIDMixin, BaseUserManager[User, PydanticObjectId]):
