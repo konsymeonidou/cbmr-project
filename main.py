@@ -4,7 +4,6 @@ from app.routes.metrics import metrics_router
 from app.routes.candidate import candidate_router
 from contextlib import asynccontextmanager
 import uvicorn
-from app.auth_users.app import app as auth_users_app
 
 app = FastAPI()
 
