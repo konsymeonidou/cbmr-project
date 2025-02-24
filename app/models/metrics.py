@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 from typing import Optional
 from datetime import date
 import uuid
@@ -21,6 +21,18 @@ class CycleMetrics(BaseModel):
                 "high_days": 3
             }
         }
+
+    @field_validator('flow')
+    def validate_flow(cls, v):
+        if v < 0:
+            raise ValueError('Flow must be a positive integer')
+        return v
+
+    @field_validator('weight')
+    def validate_weight(cls, v):
+        if v <= 0:
+            raise ValueError('Weight must be greater than 0')
+        return v
 
 class OptionalMetrics(BaseModel):
     # Optional fields

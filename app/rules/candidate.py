@@ -1,34 +1,36 @@
-# from fastapi import Body, Request, HTTPException, status
-# from fastapi.encoders import jsonable_encoder
-# from models.candidate import Candidate
-# from bson import ObjectId
+from fastapi import Body, Request, HTTPException, status
+from fastapi.encoders import jsonable_encoder
+from app.models.candidate import Candidate
+from bson import ObjectId
 
 
-# def get_collection_Candidate(request: Request):
-#   return request.app.database["Candidates"]
-
-# def create_Candidate(request: Request, Candidate: Candidate = Body(...)):
-#     Candidate = jsonable_encoder(Candidate)
-#     new_Candidate = get_collection_Candidate(request).insert_one(Candidate)
-#     created_Candidate = get_collection_Candidate(request).find_one({"id": new_Candidate.inserted_id})
-#     return created_Candidate
+def get_collection_candidate(request: Request):
+    return request.app.database["candidates"]
 
 
-# def list_Candidates(request: Request, limit: int):
-#     Candidates = list(get_collection_Candidate(request).find(limit = limit))
-#     return Candidates
+def create_candidate(request: Request, candidate: Candidate = Body(...)):
+    candidate_data = jsonable_encoder(candidate)
+    candidate_data["_id"] = candidate_data.pop("id") 
+    new_candidate = get_collection_candidate(request).insert_one(candidate)
+    created_candidate = get_collection_candidate(request).find_one({"_id": new_candidate.inserted_id})
+    return created_candidate
 
 
-# def find_Candidate(request: Request, id: str):
-#     if (Candidate := get_collection_Candidate(request).find_one({"id": ObjectId(id)})):
-#         return Candidate
-#     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Candidate with id {id} not found!")
+def list_candidates(request: Request, limit: int):
+    candidates = list(get_collection_candidate(request).find().limit(limit))
+    return candidates
 
 
-# def delete_Candidate(request: Request, id: str):
-#     deleted_Candidate = get_collection_Candidate(request).delete_one({"_id": ObjectId(id)})
+def find_candidate(request: Request, id: str):
+    if (candidate := get_collection_candidate(request).find_one({"_id": ObjectId(id)})):
+        return candidate
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Candidate with id {id} not found!")
 
-#     if deleted_Candidate.deleted_count == 1:
-#         return f"Candidate with id {id} deleted sucessfully"
 
-#     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Candidate with id {id} not found!")
+def delete_candidate(request: Request, id: str):
+    deleted_candidate = get_collection_candidate(request).delete_one({"_id": ObjectId(id)})
+
+    if deleted_candidate.deleted_count == 1:
+        return f"Candidate with id {id} deleted successfully"
+
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Candidate with id {id} not found!")
