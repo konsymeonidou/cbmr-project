@@ -62,27 +62,27 @@
 
 <img src="images/tmcr_diagram_horizontal.png" alt="tmcrdiagram" width="1050" height="250">
 
-Overview <br />
+**Overview** <br />
 This project processes and stores menstrual health data from different sources, including eg smart devices and manual entries. <br />
 The goal is to provide a structured way to collect, store, and analyze this data for research purposes. <br />
 
-Tech Stack <br />
+**Tech Stack** <br />
 MongoDB – Stores heterogeneous data efficiently <br />
 FastAPI – Provides a CRUD API to interact with the database <br />
 Streamlit – A simple UI for data visualization and dashboards <br />
 
-Features <br />
+**Features** <br />
 ✔️ Parses and cleans dummy menstrual data <br />
 ✔️ Stores data in MongoDB for structured access <br />
 ✔️ Provides API endpoints for querying and managing records <br />
 ✔️ Includes an initial UI for researchers to view and analyze data <br />
 
-Future Improvements <br />
+**Future Improvements** <br />
 🔹 Optimize data processing and storage <br />
 🔹 Enhance UI with better visualizations <br />
 🔹 Improve API security and error handling <br />
 
-Note: <br />
+**Note:** <br />
 This project is a work in progress. While it functions as expected, there may be missing features or areas for improvement.  <br />
 Feedback and contributions are welcome!
 
