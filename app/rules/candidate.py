@@ -23,13 +23,13 @@ def list_candidates(request: Request, limit: int):
 
 
 def find_candidate(request: Request, id: str):
-    if (candidate := get_collection_candidate(request).find_one({"_id": ObjectId(id)})):
+    if (candidate := get_collection_candidate(request).find_one({"_id": id})):
         return candidate
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Candidate with id {id} not found!")
 
 
 def delete_candidate(request: Request, id: str):
-    deleted_candidate = get_collection_candidate(request).delete_one({"_id": ObjectId(id)})
+    deleted_candidate = get_collection_candidate(request).delete_one({"_id": id})
 
     if deleted_candidate.deleted_count == 1:
         return f"Candidate with id {id} deleted successfully"

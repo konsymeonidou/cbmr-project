@@ -24,7 +24,7 @@ def list_Metrics(request: Request, limit: Optional[int] = Query(100, description
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
 
-@metrics_router.get("/{health_id}", response_description="Get Metrics by health ID", response_model=HealthMetrics)
+@metrics_router.get("/{id}", response_description="Get Metrics by health ID", response_model=HealthMetrics)
 def get_Metrics_by_id(request: Request, health_id: str):
     try:
         return find_HealthMetrics(request, health_id)
@@ -33,7 +33,7 @@ def get_Metrics_by_id(request: Request, health_id: str):
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
 
-@metrics_router.delete("/{health_id}", response_description="Delete health metrics")
+@metrics_router.delete("/{id}", response_description="Delete health metrics")
 def delete_metrics(request: Request, health_id: str):
     try:
         return delete_HealthMetrics(request, health_id)

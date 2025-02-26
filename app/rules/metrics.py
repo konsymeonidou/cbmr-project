@@ -22,15 +22,15 @@ def list_HealthMetrics(request: Request, limit: int):
 
 
 def find_HealthMetrics(request: Request, id: str):
-    if (HealthMetrics := get_collection_metrics(request).find_one({"health_id": ObjectId(id)})):
+    if (HealthMetrics := get_collection_metrics(request).find_one({"_id": id})):
         return HealthMetrics
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"HealthMetrics with id {id} not found!")
 
 
 def delete_HealthMetrics(request: Request, id: str):
-    deleted_HealthMetrics = get_collection_metrics(request).delete_one({"health_id": ObjectId(id)})
+    deleted_HealthMetrics = get_collection_metrics(request).delete_one({"_id": id})
 
     if deleted_HealthMetrics.deleted_count == 1:
-        return f"HealthMetrics with health_id {id} deleted sucessfully"
+        return f"HealthMetrics with id {id} deleted sucessfully"
 
-    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"HealthMetrics with health_id {id} not found!")
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"HealthMetrics with id {id} not found!")
