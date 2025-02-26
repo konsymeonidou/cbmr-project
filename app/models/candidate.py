@@ -1,17 +1,16 @@
 from bson import ObjectId
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from typing import Optional
 
 
 class Candidate(BaseModel):
-    id: str = Field(default_factory=lambda: str(ObjectId()), alias="_id")
     name: str
     email: Optional[str]
     phone_number: Optional[str]
     address: Optional[str]
     age: int
 
-    class Config:
+    model_config = ConfigDict(
         json_schema_extra = {
             "example": {
                 "name": "Mary Doe",
@@ -20,5 +19,15 @@ class Candidate(BaseModel):
                 "address": "123 Main Street, Springfield, IL",
                 "age": 30
             }
-        }
-        populate_by_name = True 
+        },
+        populate_by_name = True )
+
+
+
+# Model used for output (GET)
+class CandidateResponse(Candidate):
+    id: Optional[str] = Field(alias="_id")
+
+    class Config:
+        json_encoders = {ObjectId: str}
+        populate_by_name = True

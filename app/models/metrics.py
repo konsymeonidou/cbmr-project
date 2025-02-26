@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, ConfigDict
 from typing import Optional
 from datetime import date
 from bson import ObjectId
@@ -11,7 +11,7 @@ class CycleMetrics(BaseModel):
     weight: float
     high_days: int
 
-    class Config:
+    model_config = ConfigDict(
         json_schema_extra = {
             "example": {
                 "flow": 3,
@@ -20,7 +20,7 @@ class CycleMetrics(BaseModel):
                 "weight": 72.5,
                 "high_days": 3
             }
-        }
+        })
 
     @field_validator('flow')
     def validate_flow(cls, v):
@@ -42,7 +42,7 @@ class OptionalMetrics(BaseModel):
     medications: Optional[str]
     conditions: Optional[str]
 
-    class Config:
+    model_config = ConfigDict(
         json_schema_extra = {
             "example": {
                 "height": 1.75,
@@ -51,14 +51,22 @@ class OptionalMetrics(BaseModel):
                 "medications": "Ibuprofen",
                 "conditions": "Asthma"
             }
-        }
+        })
 
 class HealthMetrics(BaseModel):
-    id: str = Field(default_factory=lambda: str(ObjectId()), alias="_id")
     candidate_id: str
     date: date
     daily_metrics: CycleMetrics
     optional_metrics: Optional[OptionalMetrics]
 
+    model_config = ConfigDict(
+        populate_by_name = True )
+    
+
+# Model used for output (GET)
+class HealthMetricsResponse(HealthMetrics):
+    id: Optional[str] = Field(alias="_id")
+
     class Config:
-        populate_by_name = True 
+        json_encoders = {ObjectId: str}
+        populate_by_name = True

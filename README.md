@@ -124,10 +124,9 @@ This is a guide in order to understand how to build the project
   uvicorn main:app --reload
   http://127.0.0.1:8000/docs
   ```
-* Activate and run MongoDB 
+* Start and run MongoDB 
   ```sh
   sudo systemctl start mongod
-  sudo systemctl enable mongod
   sudo systemctl status mongod
   ```
   Note: Follow official documentation in order to install MongoDB locally if needed

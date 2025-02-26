@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Body, Request, status, HTTPException
 from typing import List
-from app.models.candidate import Candidate
+from app.models.candidate import Candidate, CandidateResponse
 from app.rules.candidate import (
     create_candidate,
     list_candidates,
@@ -17,14 +17,14 @@ def create_candidate_route(request: Request, candidate: Candidate = Body(...)):
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
 
-@candidate_router.get("/", response_description="List candidates", response_model=List[Candidate])
+@candidate_router.get("/", response_description="List candidates", response_model=List[CandidateResponse])
 def list_candidates_route(request: Request, limit: int = 100):
     try:
         return list_candidates(request, limit)
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
 
-@candidate_router.get("/{id}", response_description="Get a single candidate by id", response_model=Candidate)
+@candidate_router.get("/{id}", response_description="Get a single candidate by id", response_model=CandidateResponse)
 def find_candidate_route(request: Request, id: str):
     try:
         return find_candidate(request, id)
