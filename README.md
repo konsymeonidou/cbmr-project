@@ -12,11 +12,11 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <!-- <a href="https://github.com/github_username/repo_name">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  <!-- <a>
+    <img src="cbmr-project.png" alt="Logo" width="80" height="80">
   </a> -->
 
-<h3 align="center">Cbmr project which includes menstrual metrics app</h3>
+<h3 align="center">Menstrual Metrics Data Management App</h3>
 
   <p align="center">
     February 2025
@@ -67,9 +67,9 @@ This project processes and stores menstrual health data from different sources, 
 The goal is to provide a structured way to collect, store, and analyze this data for research purposes. <br />
 
 **Tech Stack** <br />
-MongoDB – Stores heterogeneous data efficiently <br />
-FastAPI – Provides a CRUD API to interact with the database <br />
-Streamlit – A simple UI for data visualization and dashboards <br />
+🔹 MongoDB – Stores heterogeneous data efficiently <br />
+🔹 FastAPI – Provides a CRUD API to interact with the database <br />
+🔹 Streamlit – A simple UI for data visualization and dashboards <br />
 
 **Features** <br />
 ✔️ Parses and cleans dummy menstrual data <br />
@@ -130,6 +130,12 @@ This is a guide in order to understand how to build the project
   sudo systemctl status mongod
   ```
   Note: Follow official documentation in order to install MongoDB locally if needed
+
+  * Insert data on the database 
+  ```sh
+  Run the Python script parse_csv.py
+  ```
+  Note: This can be altered accordingly
   
 * Explore Mongodb database using the following commands
   ```sh
