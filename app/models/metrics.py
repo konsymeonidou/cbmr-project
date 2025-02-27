@@ -12,27 +12,29 @@ class CycleMetrics(BaseModel):
     high_days: int
 
     model_config = ConfigDict(
-        json_schema_extra = {
+        json_schema_extra={
             "example": {
                 "flow": 3,
                 "mood": "Happy",
                 "steps": 10000,
                 "weight": 72.5,
-                "high_days": 3
+                "high_days": 3,
             }
-        })
+        }
+    )
 
-    @field_validator('flow')
+    @field_validator("flow")
     def validate_flow(cls, v):
         if v < 0:
-            raise ValueError('Flow must be a positive integer')
+            raise ValueError("Flow must be a positive integer")
         return v
 
-    @field_validator('weight')
+    @field_validator("weight")
     def validate_weight(cls, v):
         if v <= 0:
-            raise ValueError('Weight must be greater than 0')
+            raise ValueError("Weight must be greater than 0")
         return v
+
 
 class OptionalMetrics(BaseModel):
     # Optional fields
@@ -43,15 +45,17 @@ class OptionalMetrics(BaseModel):
     conditions: Optional[str]
 
     model_config = ConfigDict(
-        json_schema_extra = {
+        json_schema_extra={
             "example": {
                 "height": 1.75,
                 "blood_type": "A+",
                 "allergies": "Pollen",
                 "medications": "Ibuprofen",
-                "conditions": "Asthma"
+                "conditions": "Asthma",
             }
-        })
+        }
+    )
+
 
 class HealthMetrics(BaseModel):
     candidate_id: str
@@ -59,9 +63,8 @@ class HealthMetrics(BaseModel):
     daily_metrics: CycleMetrics
     optional_metrics: Optional[OptionalMetrics]
 
-    model_config = ConfigDict(
-        populate_by_name = True )
-    
+    model_config = ConfigDict(populate_by_name=True)
+
 
 # Model used for output (GET)
 class HealthMetricsResponse(HealthMetrics):

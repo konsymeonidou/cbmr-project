@@ -11,17 +11,17 @@ class Candidate(BaseModel):
     age: int
 
     model_config = ConfigDict(
-        json_schema_extra = {
+        json_schema_extra={
             "example": {
                 "name": "Mary Doe",
                 "email": "[email protected]",
                 "phone_number": "555-555-5555",
                 "address": "123 Main Street, Springfield, IL",
-                "age": 30
+                "age": 30,
             }
         },
-        populate_by_name = True )
-
+        populate_by_name=True,
+    )
 
 
 # Model used for output (GET)
