@@ -1,6 +1,6 @@
 import pytest
 
 
-def pytest_sessionfinish(session, exitstatus):
-    if session.testscollected == 0:
-        exitstatus = 0  # Force pytest to exit successfully
+@pytest.mark.parametrize("a, b, expected", [(1, 1, 2), (2, 2, 4)])
+def test_addition(a, b, expected):
+    assert a + b == expected
