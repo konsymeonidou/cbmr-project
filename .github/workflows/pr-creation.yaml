@@ -1,0 +1,22 @@
+name: Auto Create Pull Request
+
+on:
+  push:
+    branches:
+      - main  # Trigger when pushing to branch
+
+jobs:
+  create-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          branch: main
+          title: "Automated PR: Merge develop into main"
+          body: "This pull request was automatically created by GitHub Actions."
+          labels: "auto-pr"
+          reviewers: "konsymeonidou"
