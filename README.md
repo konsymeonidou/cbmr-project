@@ -60,7 +60,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<img src="images/tmcr_diagram_horizontal.png" alt="tmcrdiagram" width="1050" height="250">
+<img src="cbmr-project.png" alt="cbmr-project" width="1050" height="250">
 
 **Overview** <br />
 This project processes and stores menstrual health data from different sources, including eg smart devices and manual entries. <br />
