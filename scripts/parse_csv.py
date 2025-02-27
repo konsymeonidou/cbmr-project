@@ -1,13 +1,11 @@
 import csv
 from pymongo import MongoClient
-import uuid
 
 client = MongoClient("mongodb://localhost:27017/")
 db = client["menstrual_db"]
 
 def insert_candidate(db, candidate_data):
     """Insert candidate and return its ObjectId"""
-    candidate_data["_id"] = str(uuid.uuid4())
     result = db["candidates"].insert_one(candidate_data)
     return str(result.inserted_id)
 
@@ -24,8 +22,7 @@ def parse_csv_and_insert(file_path):
                 "address": row["address"],
                 "age": int(row["age"])
             }
-            candidate_id = insert_candidate(db, candidate_data)
-            print(candidate_data)
+
             # Extract cycle metrics
             cycle_metrics = {
                 "flow": int(row["flow"]),
@@ -34,7 +31,6 @@ def parse_csv_and_insert(file_path):
                 "weight": float(row["weight"]),
                 "high_days": int(row["high_days"])
             }
-            print(cycle_metrics)
 
             # Extract optional metrics
             optional_metrics = {
@@ -44,11 +40,10 @@ def parse_csv_and_insert(file_path):
                 "medications": row["medications"] if row["medications"] else None,
                 "conditions": row["conditions"] if row["conditions"] else None
             }
-            print(optional_metrics)
+
             # Construct and insert health metrics
             health_metrics = {
-                "_id": str(uuid.uuid4()),
-                "candidate_id": candidate_id,
+                "candidate_id": insert_candidate(db, candidate_data),
                 "date": row["date"],
                 "daily_metrics": cycle_metrics,
                 "optional_metrics": optional_metrics
