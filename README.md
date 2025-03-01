@@ -45,12 +45,12 @@
       </ul>
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
+      <a href="#Usage">Usage</a>
+      <!-- <ul>
         <li><a href="#prerequisites">Libraries</a></li>
-      </ul>
+      </ul> -->
     </li>
-    <li><a href="#usage">Usage</a></li>
+    <!-- <li><a href="#usage">Usage</a></li> -->
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
@@ -103,7 +103,7 @@ Feedback and contributions are welcome!
 
 
 <!-- GETTING STARTED -->
-## Getting Started
+## Usage
 
 This is a guide in order to understand how to build the project
 
@@ -157,7 +157,7 @@ This is a guide in order to understand how to build the project
   
 
 <!-- USAGE EXAMPLES -->
-## Usage
+<!-- ## Usage -->
 
 
 
